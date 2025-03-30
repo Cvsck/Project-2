@@ -1,4 +1,4 @@
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
 
 
 def get_user_search_query() -> str:
@@ -66,10 +66,10 @@ def filter_vacancies_by_keywords(vacancies: List[Dict], keywords: List[str]) -> 
         raise TypeError("filter_keywords должен быть списком строк.")
 
     return [
-        vacancy for vacancy in vacancies
-        if any(keyword in (vacancy.get('description', "").lower()) for keyword in keywords)
+        vacancy
+        for vacancy in vacancies
+        if any(keyword in (vacancy.get("description", "").lower()) for keyword in keywords)
     ]
-
 
 
 def filter_vacancies_by_salary(vacancies: List[Dict], salary: Optional[int]) -> List[Dict]:
@@ -84,7 +84,7 @@ def filter_vacancies_by_salary(vacancies: List[Dict], salary: Optional[int]) -> 
 
     filtered_vacancies = []
     for vacancy in vacancies:
-        salary_data = vacancy.get('salary')
+        salary_data = vacancy.get("salary")
         if not salary_data or not isinstance(salary_data, str):  # Проверяем, что salary — строка
             print(f"Некорректное поле salary: {salary_data}")  # Отладочный вывод
             continue
@@ -101,7 +101,6 @@ def filter_vacancies_by_salary(vacancies: List[Dict], salary: Optional[int]) -> 
     return filtered_vacancies
 
 
-
 def display_vacancies(vacancies: List[Dict], top_n: Optional[int] = None) -> None:
     """
     Выводит список вакансий в консоль.
@@ -114,8 +113,9 @@ def display_vacancies(vacancies: List[Dict], top_n: Optional[int] = None) -> Non
 
     print("\nТоп вакансий:")
     for i, vacancy in enumerate(vacancies[:top_n], start=1):
-        print(f"\n{i}. Вакансия: {vacancy.get('title')}\n"
-              f"   Ссылка: {vacancy.get('link')}\n"
-              f"   Зарплата: {vacancy.get('salary')}\n"
-              f"   Описание: {vacancy.get('description')}")
-
+        print(
+            f"\n{i}. Вакансия: {vacancy.get('title')}\n"
+            f"   Ссылка: {vacancy.get('link')}\n"
+            f"   Зарплата: {vacancy.get('salary')}\n"
+            f"   Описание: {vacancy.get('description')}"
+        )

@@ -1,7 +1,9 @@
-import unittest
-import os
 import json
+import os
+import unittest
+
 from src.fileworker import JsonVacancyStorage
+
 
 class TestJsonVacancyStorage(unittest.TestCase):
     def setUp(self):
@@ -20,7 +22,7 @@ class TestJsonVacancyStorage(unittest.TestCase):
             "title": "Python Developer",
             "link": "https://example.com",
             "salary": "100000 - 150000 RUR",
-            "description": "Опыт работы с Python 3+ лет."
+            "description": "Опыт работы с Python 3+ лет.",
         }
 
         # Добавляем вакансию
@@ -31,6 +33,7 @@ class TestJsonVacancyStorage(unittest.TestCase):
             data = json.load(file)
         self.assertEqual(len(data), 1)
         self.assertEqual(data[0]["Вакансия"], "Python Developer")
+
 
 if __name__ == "__main__":
     unittest.main()

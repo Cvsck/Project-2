@@ -1,4 +1,5 @@
 import unittest
+
 from src.vacancy import Vacancy
 
 
@@ -6,10 +7,7 @@ class TestVacancy(unittest.TestCase):
     def test_vacancy_creation(self):
         """Тест создания объекта Vacancy."""
         vacancy = Vacancy(
-            "Python Developer",
-            "https://example.com",
-            "100000 - 150000 RUR",
-            "Требуется опыт работы с Python."
+            "Python Developer", "https://example.com", "100000 - 150000 RUR", "Требуется опыт работы с Python."
         )
 
         self.assertEqual(vacancy.title, "Python Developer")
@@ -20,10 +18,7 @@ class TestVacancy(unittest.TestCase):
     def test_vacancy_str(self):
         """Тест строкового представления объекта Vacancy."""
         vacancy = Vacancy(
-            "Python Developer",
-            "https://example.com",
-            "100000 - 150000 RUR",
-            "Требуется опыт работы с Python."
+            "Python Developer", "https://example.com", "100000 - 150000 RUR", "Требуется опыт работы с Python."
         )
 
         expected_output = (
@@ -43,18 +38,15 @@ class TestVacancy(unittest.TestCase):
                 "salary": {"from": 100000, "to": 150000, "currency": "RUR"},
                 "snippet": {
                     "requirement": "Опыт работы с Python 3+ лет.",
-                    "responsibility": "Разработка веб-приложений."
-                }
+                    "responsibility": "Разработка веб-приложений.",
+                },
             },
             {
                 "name": "Data Scientist",
                 "alternate_url": "https://example2.com",
                 "salary": None,
-                "snippet": {
-                    "requirement": None,
-                    "responsibility": None
-                }
-            }
+                "snippet": {"requirement": None, "responsibility": None},
+            },
         ]
 
         vacancies = Vacancy.cast_to_object_list(vacancies_json)
@@ -64,9 +56,7 @@ class TestVacancy(unittest.TestCase):
         self.assertEqual(vacancies[0].title, "Python Developer")
         self.assertEqual(vacancies[0].link, "https://example.com")
         self.assertEqual(vacancies[0].salary, "100000 - 150000 RUR")
-        self.assertEqual(
-            vacancies[0].description, "Опыт работы с Python 3+ лет. Разработка веб-приложений."
-        )
+        self.assertEqual(vacancies[0].description, "Опыт работы с Python 3+ лет. Разработка веб-приложений.")
 
         self.assertEqual(vacancies[1].title, "Data Scientist")
         self.assertEqual(vacancies[1].link, "https://example2.com")

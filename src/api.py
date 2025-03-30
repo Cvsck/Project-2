@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+
 import requests
+
 
 class JobAPI(ABC):
     """Абстрактный базовый класс для взаимодействия с API сервисов вакансий"""
@@ -22,8 +24,8 @@ class HhRuAPI(JobAPI):
     """Класс для работы с API платформы hh.ru"""
 
     def __init__(self):
-        super().__init__('https://api.hh.ru/vacancies')  # Установка базового URL
-        self._headers = {'User-Agent': 'HH-User-Agent'}  # Заголовки для запросов
+        super().__init__("https://api.hh.ru/vacancies")  # Установка базового URL
+        self._headers = {"User-Agent": "HH-User-Agent"}  # Заголовки для запросов
 
     def _connect(self):
         """Метод подключения к API hh.ru"""
@@ -44,16 +46,16 @@ class HhRuAPI(JobAPI):
         """
         self._connect()  # Проверка подключения перед запросом данных
         params = {
-            'text': keyword,  # Поисковый запрос
-            'page': page,  # Номер страницы
-            'per_page': per_page,  # Количество вакансий на странице
-            'area': 113  # Ограничение по России
+            "text": keyword,  # Поисковый запрос
+            "page": page,  # Номер страницы
+            "per_page": per_page,  # Количество вакансий на странице
+            "area": 113,  # Ограничение по России
         }
         try:
             response = requests.get(self._base_url, headers=self._headers, params=params)
             response.raise_for_status()  # Проверка успешности запроса
             data = response.json()
             print(f"Получено {len(data.get('items', []))} вакансий на странице {page}.")
-            return data.get('items', [])
+            return data.get("items", [])
         except requests.exceptions.RequestException as e:
             raise ValueError(f"Ошибка при получении данных: {e}")

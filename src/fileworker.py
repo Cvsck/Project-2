@@ -28,7 +28,7 @@ class JsonVacancyStorage(FileWorker):
     """Класс для работы с JSON-файлом"""
 
     def __init__(self, filename="vacancies.json"):
-        self.__filename = os.path.join(os.getcwd(), filename) # Приватный атрибут имени файла
+        self.__filename = os.path.join(os.getcwd(), filename)  # Приватный атрибут имени файла
 
     def _read_file(self):
         """Читает данные из JSON файла"""
